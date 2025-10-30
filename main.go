@@ -2,14 +2,54 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 )
 
 func main() {
-	fmt.Println(canConstruct("a", "b"))
-	fmt.Println(canConstruct("aa", "ab"))
-	fmt.Println(canConstruct("aa", "aab"))
-	fmt.Println(canConstruct("aab", "baa"))
+	fmt.Println(removeDuplicates([]int{1, 1, 2}))
+	fmt.Println(removeDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}))
+	fmt.Println(removeDuplicates([]int{0, 0, 0, 1}))
+	fmt.Println(removeDuplicates([]int{0, 1, 1, 1, 1}))
+}
+
+// No.268 Missing Number
+func missingNumber(nums []int) int {
+	sort.Ints(nums)
+	for i, v := range nums {
+		if i != v {
+			return i
+		}
+	}
+	return len(nums)
+}
+
+// No.26 Remove Duplicates from Sorted Array
+func removeDuplicates(nums []int) int {
+	previous := nums[0]
+	for i := 1; i < len(nums); i++ {
+		if previous == nums[i] {
+			nums = append(nums[:i], nums[i+1:]...)
+			i--
+			continue
+		}
+		previous = nums[i]
+	}
+	return len(nums)
+}
+
+// No.27 Remove Element
+func removeElement(nums []int, val int) int {
+	count := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == val {
+			nums = append(nums[:i], nums[i+1:]...)
+			count++
+			i--
+			continue
+		}
+	}
+	return len(nums)
 }
 
 // No.9 Palindrome Number
@@ -124,4 +164,24 @@ func canConstruct(ransomNote string, magazine string) bool {
 		magazineMap[c]--
 	}
 	return true
+}
+
+// No.283 Move Zeros
+// you must do this in-place without making a copy of the array
+func moveZeros(nums []int) {
+	loopCount := 0
+	for i := 0; i < len(nums); i++ {
+		if loopCount == len(nums) {
+			break
+		}
+
+		if nums[i] == 0 {
+			nums = append(nums[:i], nums[i+1:]...)
+			nums = append(nums, 0)
+			i--
+		}
+		loopCount++
+	}
+
+	fmt.Println(nums)
 }
