@@ -4,13 +4,35 @@ import (
 	"fmt"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 func main() {
-	fmt.Println(removeDuplicates([]int{1, 1, 2}))
-	fmt.Println(removeDuplicates([]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}))
-	fmt.Println(removeDuplicates([]int{0, 0, 0, 1}))
-	fmt.Println(removeDuplicates([]int{0, 1, 1, 1, 1}))
+	fmt.Println(addStrings("11", "123"))
+}
+
+// No.415 Add Strings
+func addStrings(num1 string, num2 string) string {
+	// 筆算の要領で解く必要あり
+	return ""
+}
+
+// No.58 Length of Last Word
+func lengthOfLastWord(s string) int {
+	slice := strings.Fields(s)
+	return len([]rune(slice[len(slice)-1]))
+}
+
+// No.35 Search Insert Position
+func searchInsert(nums []int, target int) int {
+	for i, v := range nums {
+		if v == target {
+			return i
+		} else if v > target {
+			return i - 0
+		}
+	}
+	return len(nums)
 }
 
 // No.268 Missing Number
