@@ -8,12 +8,60 @@ import (
 )
 
 func main() {
-	fmt.Println(addStrings("11", "123"))
+	fmt.Println(majorityElement([]int{3, 2, 3}))
+	fmt.Println(majorityElement([]int{2, 2, 1, 1, 1, 2, 2}))
+}
+
+// No.169 Majority Element
+func majorityElement(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	m := make(map[int]int)
+	for _, v := range nums {
+		cnt, ok := m[v]
+		if !ok {
+			m[v] = 1
+		} else {
+			m[v] = cnt + 1
+			if m[v] > len(nums)/2 {
+				return v
+			}
+		}
+	}
+	return 0
 }
 
 // No.415 Add Strings
 func addStrings(num1 string, num2 string) string {
-	// 筆算の要領で解く必要あり
+	// fmt.Printf("start %s %s\n", num1, num2)
+	// sum := make([]string, 0)
+	// rnum1 := []rune(num1)
+	// rnum2 := []rune(num2)
+	// carryover := false
+	// for i, j := len(rnum1)-1, len(rnum2)-1; i >= 0 || j >= 0; i, j = i-1, j-1 {
+	// 	var n1, n2 int
+	// 	if i >= 0 {
+	// 		// fmt.Printf("num1:%s\n", string(rnum1[i]))
+	// 		n1, _ = strconv.Atoi(string(rnum1[i]))
+	// 	}
+	// 	if j >= 0 {
+	// 		// fmt.Printf("num2:%s\n", string(rnum2[j]))
+	// 		n2, _ = strconv.Atoi(string(rnum2[j]))
+	// 	}
+	// 	n := n1 + n2
+	// 	if carryover {
+	// 		n++
+	// 	}
+	// 	if len(strconv.Itoa(n)) == 2 {
+	// 		carryover = true
+	// 	} else {
+	// 		carryover = false
+	// 	}
+
+	// 	fmt.Println(n)
+	// }
 	return ""
 }
 
