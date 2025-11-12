@@ -1,18 +1,37 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	fmt.Println(hasPathSum(nil, 10))
-	root := &TreeNode{1, &TreeNode{2, nil, nil}, &TreeNode{3, nil, nil}}
-	fmt.Println(hasPathSum(root, 5))
-	fmt.Println(hasPathSum(root, 3))
-	fmt.Println(hasPathSum(root, 4))
+	validPhoneNumber()
+}
+
+// No.193 Valid Phone number
+func validPhoneNumber() {
+	file, err := os.Open("file.txt")
+	if err != nil {
+		fmt.Println("failed to open file.txt")
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	re1 := regexp.MustCompile(`^\(\d{3}\) \d{3}-\d{4}$`)
+	re2 := regexp.MustCompile(`\d{3}-\d{3}-\d{4}`)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if re1.MatchString(line) || re2.MatchString(line) {
+			fmt.Println(line)
+		}
+	}
 }
 
 // No.112 Path Sum
