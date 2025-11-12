@@ -8,11 +8,40 @@ import (
 )
 
 func main() {
-	fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
-	fmt.Println(longestCommonPrefix([]string{"dog", "racecar", "car"}))
-	fmt.Println(longestCommonPrefix([]string{"ab", "a"}))
-	fmt.Println(longestCommonPrefix([]string{"", "a"}))
-	fmt.Println(longestCommonPrefix([]string{"aaa", ""}))
+	fmt.Println(hasPathSum(nil, 10))
+	root := &TreeNode{1, &TreeNode{2, nil, nil}, &TreeNode{3, nil, nil}}
+	fmt.Println(hasPathSum(root, 5))
+	fmt.Println(hasPathSum(root, 3))
+	fmt.Println(hasPathSum(root, 4))
+}
+
+// No.112 Path Sum
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func hasPathSum(root *TreeNode, targetSum int) bool {
+	if root == nil {
+		return false
+	}
+
+	if root.Left == nil && root.Right == nil {
+		return (targetSum - root.Val) == 0
+	}
+
+	targetSum -= root.Val
+
+	if hasPathSum(root.Left, targetSum) {
+		return true
+	}
+
+	if hasPathSum(root.Right, targetSum) {
+		return true
+	}
+
+	return false
 }
 
 // No.14 Longest Common Prefix
