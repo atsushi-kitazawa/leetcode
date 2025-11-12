@@ -8,8 +8,40 @@ import (
 )
 
 func main() {
-	fmt.Println(majorityElement([]int{3, 2, 3}))
-	fmt.Println(majorityElement([]int{2, 2, 1, 1, 1, 2, 2}))
+	fmt.Println(longestCommonPrefix([]string{"flower", "flow", "flight"}))
+	fmt.Println(longestCommonPrefix([]string{"dog", "racecar", "car"}))
+	fmt.Println(longestCommonPrefix([]string{"ab", "a"}))
+	fmt.Println(longestCommonPrefix([]string{"", "a"}))
+	fmt.Println(longestCommonPrefix([]string{"aaa", ""}))
+}
+
+// No.14 Longest Common Prefix
+func longestCommonPrefix(strs []string) string {
+	if len(strs) == 0 {
+		return ""
+	}
+	prefix := strs[0]
+	rPrefix := []rune(prefix)
+	for i := 1; i < len(strs); i++ {
+		if len(strs[i]) == 0 {
+			return ""
+		}
+		rStr := []rune(strs[i])
+		for j, c := range rStr {
+			if j >= len(rPrefix) {
+				break
+			}
+			if rPrefix[j] != c {
+				rPrefix = rPrefix[:j]
+				break
+			}
+			if j == len(rStr)-1 {
+				rPrefix = rPrefix[:j+1]
+				break
+			}
+		}
+	}
+	return string(rPrefix)
 }
 
 // No.169 Majority Element
