@@ -11,7 +11,36 @@ import (
 )
 
 func main() {
-	validPhoneNumber()
+	fmt.Println(guessNumber(10))
+	fmt.Println(guessNumber(2))
+	// fmt.Println(guessNumber(1))
+}
+
+// No.374 Guess Number Higher or Lower
+func guessNumber(n int) int {
+	low := 1
+	high := n
+	for {
+		mid := low + (high-low)/2
+		switch guess(mid, 2) {
+		case 0:
+			return mid
+		case -1:
+			high = mid - 1
+		case 1:
+			low = mid + 1
+		}
+	}
+}
+
+func guess(num, pick int) int {
+	if num > pick {
+		return -1
+	} else if num < pick {
+		return 1
+	} else {
+		return 0
+	}
 }
 
 // No.193 Valid Phone number
