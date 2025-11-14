@@ -11,32 +11,35 @@ import (
 )
 
 func main() {
-	root := &TreeNode{3,
-		&TreeNode{9, nil, nil},
-		&TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}}
-	// fmt.Println(sumOfLeftLeaves(root))
-	// root = &TreeNode{3, &TreeNode{1, nil, nil}, &TreeNode{2, nil, nil}}
-	// fmt.Println(sumOfLeftLeaves(root))
-	// root = &TreeNode{3,
-	// 	&TreeNode{1, nil, &TreeNode{2, &TreeNode{10, nil, nil}, &TreeNode{3, nil, nil}}},
-	// 	&TreeNode{2, nil, &TreeNode{5, nil, nil}}}
-	// fmt.Println(sumOfLeftLeaves(root))
-	// root = &TreeNode{1, nil, nil}
-	// fmt.Println(sumOfLeftLeaves(root))
-	root = &TreeNode{3,
-		&TreeNode{4,
-			&TreeNode{-7,
-				&TreeNode{-7, nil, nil},
-				nil},
-			&TreeNode{-6,
-				&TreeNode{-5,
-					&TreeNode{-4, nil, nil},
-					nil},
-				nil},
-		},
-		&TreeNode{5, nil, nil}}
-	fmt.Println(sumOfLeftLeaves(root))
-	// [3,4,5,-7,-6,null,null,-7,null,-5,null,null,null,-4]
+	// fmt.Println(convertToBase7(100))
+	fmt.Println(convertToBase7(-8))
+}
+
+// No.504 Base 7
+func convertToBase7(num int) string {
+	var base7 string
+	if num < 0 {
+		base7 = "-"
+	} else {
+		base7 = ""
+	}
+
+	r := make([]int, 0)
+	for {
+		r = append(r, num%7)
+		num = num / 7
+		if num == 0 {
+			break
+		}
+	}
+
+	for i := len(r) - 1; i >= 0; i-- {
+		if r[i] < 0 {
+			r[i] = -r[i]
+		}
+		base7 += strconv.Itoa(r[i])
+	}
+	return base7
 }
 
 // No.404 Sum of Left Leaves
