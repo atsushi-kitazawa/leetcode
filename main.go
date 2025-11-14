@@ -11,9 +11,61 @@ import (
 )
 
 func main() {
-	fmt.Println(guessNumber(10))
-	fmt.Println(guessNumber(2))
-	// fmt.Println(guessNumber(1))
+	root := &TreeNode{3,
+		&TreeNode{9, nil, nil},
+		&TreeNode{20, &TreeNode{15, nil, nil}, &TreeNode{7, nil, nil}}}
+	// fmt.Println(sumOfLeftLeaves(root))
+	// root = &TreeNode{3, &TreeNode{1, nil, nil}, &TreeNode{2, nil, nil}}
+	// fmt.Println(sumOfLeftLeaves(root))
+	// root = &TreeNode{3,
+	// 	&TreeNode{1, nil, &TreeNode{2, &TreeNode{10, nil, nil}, &TreeNode{3, nil, nil}}},
+	// 	&TreeNode{2, nil, &TreeNode{5, nil, nil}}}
+	// fmt.Println(sumOfLeftLeaves(root))
+	// root = &TreeNode{1, nil, nil}
+	// fmt.Println(sumOfLeftLeaves(root))
+	root = &TreeNode{3,
+		&TreeNode{4,
+			&TreeNode{-7,
+				&TreeNode{-7, nil, nil},
+				nil},
+			&TreeNode{-6,
+				&TreeNode{-5,
+					&TreeNode{-4, nil, nil},
+					nil},
+				nil},
+		},
+		&TreeNode{5, nil, nil}}
+	fmt.Println(sumOfLeftLeaves(root))
+	// [3,4,5,-7,-6,null,null,-7,null,-5,null,null,null,-4]
+}
+
+// No.404 Sum of Left Leaves
+func sumOfLeftLeaves(root *TreeNode) int {
+	if root == nil || (root.Left == nil && root.Right == nil) {
+		return 0
+	}
+
+	sum := 0
+	if root.Left == nil && root.Right == nil {
+		sum += root.Val
+		return sum
+	}
+
+	if root.Left != nil {
+		if root.Left.Left == nil && root.Left.Right == nil {
+			sum += root.Left.Val
+		} else {
+			sum += sumOfLeftLeaves(root.Left)
+		}
+	}
+
+	if root.Right != nil {
+		if root.Right.Right == nil && root.Right.Left == nil {
+		} else {
+			sum += sumOfLeftLeaves(root.Right)
+		}
+	}
+	return sum
 }
 
 // No.374 Guess Number Higher or Lower
