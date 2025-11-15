@@ -11,8 +11,40 @@ import (
 )
 
 func main() {
-	// fmt.Println(convertToBase7(100))
-	fmt.Println(convertToBase7(-8))
+	fmt.Println(string(findTheDifference("abcd", "abcde")))
+	fmt.Println(string(findTheDifference("", "y")))
+	fmt.Println(string(findTheDifference("a", "aa")))
+	fmt.Println(string(findTheDifference("abb", "aabb")))
+}
+
+// No.389 Find the Difference
+func findTheDifference(s string, t string) byte {
+	tmap := make(map[string]int)
+	for _, c := range t {
+		_, ok := tmap[string(c)]
+		if !ok {
+			tmap[string(c)] = 1
+		} else {
+			tmap[string(c)] += 1
+		}
+	}
+	smap := make(map[string]int)
+	for _, c := range s {
+		_, ok := smap[string(c)]
+		if !ok {
+			smap[string(c)] = 1
+		} else {
+			smap[string(c)] += 1
+		}
+	}
+	for k, v := range tmap {
+		cnt, ok := smap[k]
+		if !ok || cnt != v {
+			return []byte(k)[0]
+		}
+	}
+
+	return []byte("a")[0]
 }
 
 // No.504 Base 7
