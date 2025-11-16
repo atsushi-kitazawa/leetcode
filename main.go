@@ -11,10 +11,32 @@ import (
 )
 
 func main() {
-	fmt.Println(string(findTheDifference("abcd", "abcde")))
-	fmt.Println(string(findTheDifference("", "y")))
-	fmt.Println(string(findTheDifference("a", "aa")))
-	fmt.Println(string(findTheDifference("abb", "aabb")))
+	fmt.Println(findContentChildren([]int{1, 2, 3}, []int{1, 1}))
+	fmt.Println(findContentChildren([]int{1, 2}, []int{1, 2, 3}))
+	fmt.Println(findContentChildren([]int{1, 2, 3}, []int{}))
+}
+
+// No.455 Assign Cookies
+func findContentChildren(g []int, s []int) int {
+	// g is children
+	// s is cookies
+	if len(s) == 0 {
+		return 0
+	}
+
+	greedCount := 0
+	sort.Ints(g)
+	sort.Ints(s)
+	for _, gg := range g {
+		for i, ss := range s {
+			if gg <= ss {
+				greedCount++
+				s[i] = 0
+				break
+			}
+		}
+	}
+	return greedCount
 }
 
 // No.389 Find the Difference
